@@ -13,11 +13,12 @@ if __name__ == "__main__":
     api_pb2_grpc.add_HelloServiceServicer_to_server(
         HelloService(), server
     )
-    print("Server listening on {0}".format(config.server_address))
-    server.add_insecure_port(config.server_address)
+    server_address = '[::]:9090'
+    print("Server listening on {0}".format(server_address))
+    server.add_insecure_port(server_address)
     server.start()
     try:
         while True:
-            time.sleep(config.one_day_in_seconds)
+            time.sleep(3600)
     except KeyboardInterrupt:
         server.stop(0)
