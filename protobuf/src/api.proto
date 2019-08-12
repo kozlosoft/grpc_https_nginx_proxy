@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package api;
+
+service HelloService { rpc say_hello(HelloRequest) returns (HelloResponse); }
+
+message HelloRequest { string name = 1; }
+
+message HelloResponse { string greetings = 1; }

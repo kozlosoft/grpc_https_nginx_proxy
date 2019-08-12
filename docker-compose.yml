@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  protobuf:
+    container_name: protobuf
+    build:
+      context: ./
+      dockerfile: ./protobuf/Dockerfile
+    volumes:
+      - './backend/src/our_grpc/:/build/py'
+      - './frontend/src/grpc:/build/js'
+      - './protobuf:/data'
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - protobuf
+    volumes:
+      - './backend:/data'
+    ports:
+      - '9090'
+    networks:
+      - server-net
+networks:
+  server-net:
