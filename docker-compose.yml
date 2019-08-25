@@ -23,13 +23,24 @@ services:
       - '9090'
     networks:
       - server-net
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - '80:80'
+    networks:
+      - server-net
   frontend:
     container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     depends_on:
-      - backend
+      - protobuf
     volumes:
       - './frontend:/data'
       # don't overwrite installed node modules in the container

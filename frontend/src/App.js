@@ -5,7 +5,8 @@ import { HelloRequest } from './grpc/api_pb';
 
 export default class App extends React.Component {
   helloService = new HelloServiceClient(
-    `http://${window.location.hostname}:80`,
+    // `http://${window.location.hostname}:80`,
+    `${window.location.hostname}:80`,
     null,
     null
   )
@@ -15,7 +16,9 @@ export default class App extends React.Component {
     response: null
   }
 
-  render() {
+  constructor() {
+    super()
+
     const request = new HelloRequest();
     request.setName("Alexey");
     this.helloService.say_hello(
@@ -28,7 +31,9 @@ export default class App extends React.Component {
         })
       }
     );
+  }
 
+  render() {
     return (
       <div>
         <ul>Look what I've got:
