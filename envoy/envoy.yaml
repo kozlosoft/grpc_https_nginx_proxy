@@ -36,6 +36,14 @@ static_resources:
           - name: envoy.grpc_web
           - name: envoy.cors
           - name: envoy.router
+      # tls_context:
+      #   common_tls_context:
+      #     alpn_protocols: "h2"
+      #     tls_certificates:
+      #       - certificate_chain:
+      #           filename: "/etc/example-com.crt"
+      #         private_key:
+      #           filename: "/etc/example-com.key"
   clusters:
   - name: backend_service
     connect_timeout: 0.25s
