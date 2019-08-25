@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { HelloServiceClient } from './grpc/api_grpc_web_pb';
+import { HelloRequest } from './grpc/api_pb';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  helloService = new HelloServiceClient(
+    `http://${window.location.hostname}:80`,
+    null,
+    null
+  )
+
+  state = {
+    error: null,
+    response: null
+  }
+
+  render() {
+    const request = new HelloRequest();
+    request.setName("Alexey");
+    this.helloService.say_hello(
+      request,
+      null,
+      (error, response) => {
+        this.setState({
+          error: error.message,
+          response: response ? JSON.stringify(response.toObject()) : null
+        })
+      }
+    );
+
+    return (
+      <div>
+        <ul>Look what I've got:
+          <li>this.state.error = {this.state.error}</li>
+          <li>this.state.response = {this.state.response}</li>
+        </ul>
+      </div>
+    );
+  }
 }
-
-export default App;
