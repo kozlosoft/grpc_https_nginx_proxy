@@ -5,7 +5,7 @@ import { HelloRequest } from './grpc/api_pb';
 
 export default class App extends React.Component {
   helloService = new HelloServiceClient(
-    `http://${window.location.hostname}:7070`,
+    `https://${window.location.hostname}:7070`,
     null,
     null
   )

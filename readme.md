@@ -8,6 +8,5 @@ Nginx has reverse-proxy to convert requests into plain http.
 docker-compose up --build
 ```
 
-# todo
-* finish http + nginx setup
-* add reverse grpc proxy for https
+# notes
+allow postman to use untrusted certificates
