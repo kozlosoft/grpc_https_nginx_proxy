@@ -23,15 +23,15 @@ services:
       - '9090'
     networks:
       - server-net
-  nginx:
-    container_name: nginx
+  envoy:
+    container_name: envoy
     build:
-      context: ./nginx
+      context: ./envoy
       dockerfile: Dockerfile
     depends_on:
       - backend
     ports:
-      - '80:80'
+      - '7070:7070'
     networks:
       - server-net
   frontend:
